@@ -13,28 +13,26 @@ import time
 def mainpage(page: ft.Page):
     page.title = "Hover Count Example"
 
-    def buttonClick(ButtonNr:int):
-        print(f"Clicked on Button{ButtonNr}")
+    def buttonClick(e):
+        print(f"Clicked on {e.control.text}")
 
     page.add(
         ft.ElevatedButton(
             text="Button1", 
             icon=ft.Icons.WAVES_ROUNDED, 
-            width=150, 
-            height=400,
-            on_click=buttonClick(1)
+            width=150, height=400,
+            on_click=buttonClick
         ),
         
         ft.ElevatedButton(
             text="Button2",
             icon=ft.Icons.PARK_ROUNDED,
             icon_color=ft.Colors.GREEN_400,
-            height=200,
-            width=500,
+            height=200,width=500,
             style=ft.ButtonStyle(
                 color= ft.Colors.RED,
             ),
-            on_click=buttonClick(2)
+            on_click=buttonClick
         )
     )
     
