@@ -16,11 +16,12 @@ def main(page: ft.Page):
     page.padding = 0
 
     # -------- Button Style --------
-    button_style = ft.ButtonStyle(
+    Default_Style = ft.ButtonStyle(
         bgcolor=ft.Colors.WHITE,
         color=ft.Colors.BLUE_900,
         text_style=ft.TextStyle(size=16, weight=ft.FontWeight.BOLD),
     )
+     #Eventuell Styles nur für Ja nein etc. machen für schöneres Design 
 
     # -------- Navigation --------
     def show(view_func):
@@ -46,17 +47,17 @@ def main(page: ft.Page):
                     controls=[
                         ft.ElevatedButton(
                             "Ja / Nein",
-                            style=button_style,
+                            style=Default_Style,
                             on_click=lambda e: show(ja_nein),
                         ),
                         ft.ElevatedButton(
                             "4-Auswahl",
-                            style=button_style,
+                            style=Default_Style,
                             on_click=lambda e: show(vier),
                         ),
                         ft.ElevatedButton(
                             "Bild-Auswahl",
-                            style=button_style,
+                            style=Default_Style,
                             on_click=lambda e: show(bilder),
                         ),
                     ],
@@ -70,42 +71,39 @@ def main(page: ft.Page):
     # -------- Ja / Nein --------
     def ja_nein():
         return ft.Column(
-            controls=[
-                appbar("Ja / Nein"),
-                ft.Row(
-                    controls=[
-                        ft.Column(
-                            controls=[
-                                ft.ElevatedButton(
-                                    "Ja",
-                                    height=120,
-                                    width=200,
-                                    style=button_style,
-                                    on_click=lambda e: clear_terminal("Ja"),
-                                )
-                            ],
-                            expand=True,
-                            alignment=ft.MainAxisAlignment.CENTER,
+        controls=[
+            appbar("Ja / Nein"),
+            ft.Row(
+                expand=True,
+                vertical_alignment=ft.CrossAxisAlignment.CENTER,
+                controls=[
+                    ft.Container(
+                        expand=True,
+                        alignment=ft.Alignment(-0.25, 0),  # links + etwas nach unten
+                        content=ft.ElevatedButton(
+                            "Ja",
+                            height=120,
+                            width=200,
+                            style=Default_Style,
+                            on_click=lambda e: clear_terminal("Ja"),
                         ),
-                        ft.Column(
-                            controls=[
-                                ft.ElevatedButton(
-                                    "Nein",
-                                    height=120,
-                                    width=200,
-                                    style=button_style,
-                                    on_click=lambda e: clear_terminal("Nein"),
-                                )
-                            ],
-                            expand=True,
-                            alignment=ft.MainAxisAlignment.CENTER,
+                    ),
+                    ft.Container(
+                        expand=True,
+                        alignment=ft.Alignment(0.25, 0),  # rechts + Mitte
+                        content=ft.ElevatedButton(
+                            "Nein",
+                            height=120,
+                            width=200,
+                            style=Default_Style,
+                            on_click=lambda e: clear_terminal("Nein"),
                         ),
-                    ],
-                    expand=True,
-                ),
-            ],
-            expand=True,
-        )
+                    ),
+                ],
+            ),
+        ],
+        expand=True,
+    )
 
     # -------- 4-Auswahl --------
     def vier():
@@ -114,7 +112,7 @@ def main(page: ft.Page):
                 str(n),
                 width=120,
                 height=120,
-                style=button_style,
+                style=Default_Style,
                 on_click=lambda e, x=n: clear_terminal(str(x)),
             )
 
